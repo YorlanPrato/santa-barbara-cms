@@ -1,0 +1,47 @@
+
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "home"
+    label: "Inicio - Texto institucional"
+    files:
+      - file: "content/home.md"
+        label: "Texto institucional"
+        name: "home"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Descripción", name: "descripcion", widget: "markdown" }
+
+  - name: "noticias"
+    label: "Carrusel de Noticias"
+    folder: "content/noticias"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen", name: "imagen", widget: "image" }
+
+  - name: "calendario"
+    label: "Fechas Especiales"
+    file: "content/calendario.yml"
+    fields:
+      - label: "Fechas"
+        name: "fechas"
+        widget: "list"
+        fields:
+          - { label: "Mes", name: "month", widget: "number", min: 0, max: 11 }
+          - { label: "Día", name: "day", widget: "number", min: 1, max: 31 }
+          - { label: "Nombre", name: "name", widget: "string" }
+
+  - name: "contacto"
+    label: "Contacto"
+    file: "content/contacto.md"
+    fields:
+      - { label: "Teléfono", name: "telefono", widget: "string" }
+      - { label: "Dirección", name: "direccion", widget: "text" }
