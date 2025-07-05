@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Día del Maestro",
+    "day": 15,
+    "month": 1
+  },
+  {
+    "name": "Carnavales",
+    "day": 12,
+    "month": 2
+  },
+  {
+    "name": "Inicio Clases 2do Lapso",
+    "day": 20,
+    "month": 2
+  },
+  {
+    "name": "Semana Santa",
+    "day": 28,
+    "month": 3
+  },
+  {
+    "name": "Día del Trabajador",
+    "day": 1,
+    "month": 5
+  },
+  {
+    "name": "Fin de Clases",
+    "day": 30,
+    "month": 6
+  }
+]

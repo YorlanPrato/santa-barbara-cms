@@ -1,0 +1,77 @@
+backend:
+  name: git-gateway
+  branch: main # Cambia a la rama donde alojarás tu sitio (ej. master, main)
+
+media_folder: "assets/uploads" # Carpeta donde se guardarán las imágenes subidas
+public_folder: "/assets/uploads" # Ruta pública para acceder a las imágenes
+
+collections:
+  - name: "site_data"
+    label: "Configuración Global del Sitio"
+    files:
+      - file: "_data/site_data.json"
+        label: "Datos Generales"
+        name: "general"
+        fields:
+          - {label: "Título de la Sección Nosotros", name: "about_title", widget: "string", default: "U.E. COLEGIO 'SANTA BÁRBARA'"}
+          - {label: "Título de la Sección Historia", name: "history_title", widget: "string", default: "NUESTRA HISTORIA"}
+          - {label: "Imagen de la Sección Historia", name: "history_image", widget: "image", required: false, default: "https://placehold.co/400x300/02BF61/FFFFFF?text=Fachada+Colegio"}
+          - {label: "Teléfono de Contacto", name: "contact_phone", widget: "string", default: "(0276) 343-3631"}
+          - {label: "Dirección de Contacto", name: "contact_address", widget: "string", default: "Carrera. 10 con Calle 7, Casa #7-7, Centro, San Cristóbal, Edo. Táchira."}
+          - {label: "Usuario de Instagram", name: "instagram_handle", widget: "string", default: "@colegio_santabarbara"}
+          - {label: "URL de Instagram", name: "instagram_url", widget: "string", default: "https://www.instagram.com/colegio_santabarbara"}
+          - {label: "URL del Mapa (iframe src)", name: "map_embed_url", widget: "string", default: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.068224355321!2d-72.23484456539155!3d7.7641527257239735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e660f9e2b1e7f9f%3A0xc3f6d7d8e6f1a8c!2sTeatro%20C%C3%ADrculo%20Militar%20San%20Crist%C3%B3bal!5e0!3m2!1ses-419!2sve!4v1717366367344!5m2!1ses-419!2sve"}
+
+  - name: "about_content"
+    label: "Contenido - Sección Nosotros"
+    files:
+      - file: "_data/about.md"
+        label: "Contenido de Nosotros"
+        name: "about"
+        fields:
+          - {label: "Contenido (Markdown)", name: "body", widget: "markdown", default: "La **U.E. Colegio “Santa Bárbara”** es una institución educativa con una sólida trayectoria...\n\nNuestros objetivos principales son: fomentar el pensamiento crítico...\n\nBuscamos preparar a nuestros estudiantes para que sean ciudadanos activos..."}
+
+  - name: "history_content"
+    label: "Contenido - Sección Historia"
+    files:
+      - file: "_data/history.md"
+        label: "Contenido de Historia"
+        name: "history"
+        fields:
+          - {label: "Contenido (Markdown)", name: "body", widget: "markdown", default: "Fundada en el año 1999 por la Licda. Evis Solvey Zabala Gutierrez y la Licda. Arelis Ardila Diaz...\n\nPosteriormente, en el año 2023, se integró el nivel de educación pre-escolar...\n\nSu dirección y gestión recaen en un equipo comprometido..."}
+
+  - name: "news"
+    label: "Noticias del Carrusel"
+    folder: "_data/news" # No es una carpeta real, solo para simular una colección de items
+    create: true # Permite crear nuevas noticias
+    slug: "{{title}}" # Genera un slug basado en el título
+    extension: "json" # Guardar cada noticia como un archivo JSON dentro de _data/news.json (simulado, se guardará en un único archivo)
+    format: "json" # Guardar como JSON
+    fields:
+      - {label: "Título de la Noticia", name: "title", widget: "string"}
+      - {label: "Descripción Breve", name: "description", widget: "text"}
+      - {label: "Imagen de la Noticia", name: "image", widget: "image", required: false}
+
+  - name: "offers"
+    label: "Oferta Académica"
+    folder: "_data/offers" # No es una carpeta real
+    create: true
+    slug: "{{title}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - {label: "Título de la Oferta", name: "title", widget: "string"}
+      - {label: "Contenido de la Oferta", name: "content", widget: "text"}
+      - {label: "Clase de Color Pastel", name: "color_class", widget: "select", options: ["pastel-yellow", "pastel-blue", "pastel-red"]}
+
+  - name: "holidays"
+    label: "Días Festivos (Calendario)"
+    folder: "_data/holidays" # No es una carpeta real
+    create: true
+    slug: "{{day}}-{{month}}-{{name}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - {label: "Nombre del Festivo", name: "name", widget: "string"}
+      - {label: "Día", name: "day", widget: "number", min: 1, max: 31}
+      - {label: "Mes (1=Enero, 12=Diciembre)", name: "month", widget: "number", min: 1, max: 12}

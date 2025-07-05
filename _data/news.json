@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Título Noticia 1",
+    "description": "Breve descripción de la noticia 1.",
+    "image": "https://picsum.photos/id/1015/400/400"
+  },
+  {
+    "title": "Título Noticia 2",
+    "description": "Breve descripción de la noticia 2.",
+    "image": "https://picsum.photos/id/1020/400/400"
+  },
+  {
+    "title": "Título Noticia 3",
+    "description": "Breve descripción de la noticia 3.",
+    "image": "https://picsum.photos/id/1043/400/400"
+  }
+]
