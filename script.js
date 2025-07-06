@@ -349,8 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Formulario de Contacto (Validación Básica) ---
     function initializeContactFormAndInfo() {
-        const contactForm = document.getElementById('contactForm');
-        const formMessages = document.getElementById('form-messages');
+        const contactForm = document.getElementById('contactForm');        
 
         // Actualizar información de contacto desde siteData.contact
         const contactPhone = document.getElementById('contact-phone');
@@ -374,28 +373,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const formData = new FormData(contactForm);
-                const name = formData.get('nombre');
-                const subject = formData.get('asunto');
-                const email = formData.get('email');
-                const message = formData.get('mensaje');
-
-                if (!name || !subject || !email || !message) {
-                    displayMessage('Por favor, completa todos los campos del formulario.', 'error');
-                    return;
-                }
-
-                console.log('Formulario enviado:', { name, subject, email, message });
-
-                displayMessage('¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.', 'success');
-                contactForm.reset();
-            });
-        }
+            }
 
         function displayMessage(message, type) {
+            const formMessages = document.getElementById('form-messages');
             if (formMessages) {
                 formMessages.textContent = message;
                 formMessages.className = 'form-messages ' + type;
