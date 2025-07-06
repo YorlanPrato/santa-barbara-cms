@@ -1,5 +1,5 @@
 ---
-section_image_history: "https://placehold.co/400x300/02BF61/FFFFFF?text=Fachada+Colegio"
+section_image_history: /assets/uploads/fachada.png
 ---
 Fundada en el año 1999 por la Licda. Evis Solvey Zabala Gutierrez y la Licda. Arelis Ardila Diaz.
 
