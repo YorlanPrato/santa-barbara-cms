@@ -1,17 +1,29 @@
-[
-  {
-    "title": "Título Noticia 1",
-    "description": "Breve descripción de la noticia 1.",
-    "image": "https://picsum.photos/id/1015/400/400"
-  },
-  {
-    "title": "Título Noticia 2",
-    "description": "Breve descripción de la noticia 2.",
-    "image": "https://picsum.photos/id/1020/400/400"
-  },
-  {
-    "title": "Título Noticia 3",
-    "description": "Breve descripción de la noticia 3.",
-    "image": "https://picsum.photos/id/1043/400/400"
-  }
-]
+{
+  "news": [
+    {
+      "title": "Abiertas Inscripciones para Nuevo Año Escolar",
+      "description": "¡Ya puedes inscribirte para el próximo año escolar 2025-2026! Visita nuestra secretaría para más información y requisitos.",
+      "image": "https://picsum.photos/id/1015/400/400"
+    },
+    {
+      "title": "Feria Científica 2025: ¡Innovación y Creatividad!",
+      "description": "Nuestros estudiantes exhibieron proyectos impresionantes en la Feria Científica de este año. ¡Orgullosos de su talento!",
+      "image": "https://picsum.photos/id/1020/400/400"
+    },
+    {
+      "title": "Actividades Deportivas para el Segundo Semestre",
+      "description": "Prepárense para una nueva ronda de torneos y actividades deportivas. ¡Fomentamos el deporte y la sana competencia!",
+      "image": "https://picsum.photos/id/1043/400/400"
+    },
+    {
+      "title": "Jornada de Vacunación Escolar",
+      "description": "Se realizará una jornada de vacunación para todos los estudiantes. Consulta el calendario y requisitos en la cartelera.",
+      "image": "https://picsum.photos/id/237/400/400"
+    },
+    {
+      "title": "Visita Guiada al Jardín Botánico Local",
+      "description": "Los estudiantes de primaria disfrutaron de una enriquecedora visita al Jardín Botánico, aprendiendo sobre la flora local.",
+      "image": "https://picsum.photos/id/1080/400/400"
+    }
+  ]
+}
