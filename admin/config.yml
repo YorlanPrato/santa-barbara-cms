@@ -40,40 +40,40 @@ collections:
         fields:
           - {label: "Contenido (Markdown)", name: "body", widget: "markdown", default: "Fundada en el año 1999 por la Licda. Evis Solvey Zabala Gutierrez y la Licda. Arelis Ardila Diaz...\n\nPosteriormente, en el año 2023, se integró el nivel de educación pre-escolar...\n\nSu dirección y gestión recaen en un equipo comprometido..."}
 
-  - name: "news_list" # Renombrado para ser más descriptivo
+  - name: "news_list"
     label: "Noticias del Carrusel"
-    file: "_data/news.json" # Edita un único archivo JSON
+    file: "_data/news.json"
     fields:
       - label: "Lista de Noticias"
-        name: "news" # El nombre del campo que contendrá el array de noticias en el JSON
+        name: "news"
         widget: "list"
-        summary: "{{fields.title}}"
+        # summary: "{{fields.title}}" # Eliminado para solucionar el error
         fields:
           - {label: "Título de la Noticia", name: "title", widget: "string"}
           - {label: "Descripción Breve", name: "description", widget: "text"}
           - {label: "Imagen de la Noticia", name: "image", widget: "image", required: false}
 
-  - name: "offers_list" # Renombrado para ser más descriptivo
+  - name: "offers_list"
     label: "Oferta Académica"
-    file: "_data/offers.json" # Edita un único archivo JSON
+    file: "_data/offers.json"
     fields:
       - label: "Lista de Ofertas"
-        name: "offers" # El nombre del campo que contendrá el array de ofertas en el JSON
+        name: "offers"
         widget: "list"
-        summary: "{{fields.title}}"
+        # summary: "{{fields.title}}" # Eliminado para solucionar el error
         fields:
           - {label: "Título de la Oferta", name: "title", widget: "string"}
           - {label: "Contenido de la Oferta", name: "content", widget: "text"}
           - {label: "Clase de Color Pastel", name: "color_class", widget: "select", options: ["pastel-yellow", "pastel-blue", "pastel-red"]}
 
-  - name: "holidays_list" # Renombrado para ser más descriptivo
+  - name: "holidays_list"
     label: "Días Festivos (Calendario)"
-    file: "_data/holidays.json" # Edita un único archivo JSON
+    file: "_data/holidays.json"
     fields:
       - label: "Lista de Días Festivos"
-        name: "holidays" # El nombre del campo que contendrá el array de festivos en el JSON
+        name: "holidays"
         widget: "list"
-        summary: "{{fields.name}} ({{fields.day}}/{{fields.month}})"
+        # summary: "{{fields.name}} ({{fields.day}}/{{fields.month}})" # Eliminado para solucionar el error
         fields:
           - {label: "Nombre del Festivo", name: "name", widget: "string"}
           - {label: "Día", name: "day", widget: "number", min: 1, max: 31}
