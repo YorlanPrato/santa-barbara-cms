@@ -1,10 +1,10 @@
 {
-  "about_title": "U.E. COLEGIO \"SANTA BÁRBARA\"",
+  "logo_image": "https://placehold.co/60x60/02BF61/FFFFFF?text=LOGO",
+  "about_title": "U.E. COLEGIO 'SANTA BÁRBARA'",
+  "calendar_title": "CALENDARIO ESCOLAR",
+  "offers_title": "NUESTRA OFERTA ACADÉMICA",
   "history_title": "NUESTRA HISTORIA",
-  "history_image": "/assets/uploads/fachada.png",
-  "contact_phone": "(0276) 343-3631",
-  "contact_address": "Carrera. 10 con Calle 7, Casa #7-7, Centro, San Cristóbal, Edo. Táchira.",
-  "instagram_handle": "@colegio_santabarbara",
-  "instagram_url": "https://www.instagram.com/colegio_santabarbara",
-  "map_embed_url": "https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d698.8370187785831!2d-72.23007300778225!3d7.766568580714711!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sve!4v1751749793967!5m2!1ses-419!2sve"
+  "form_contact_title": "Formulario de Contacto",
+  "contact_info_title": "Información de Contacto",
+  "location_title": "Nuestra Ubicación"
 }
