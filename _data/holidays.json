@@ -44,6 +44,11 @@
       "name": "Día de la Resistencia Indígena",
       "day": 12,
       "month": 10
+    },
+    {
+      "name": "Yorlan",
+      "day": 13,
+      "month": 7
     }
   ]
 }
