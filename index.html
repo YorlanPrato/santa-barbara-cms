@@ -11,12 +11,11 @@
     <header class="main-header">
         <div class="container">
             <div class="logo">
-                <img id="main-logo" src="https://placehold.co/60x60/02BF61/FFFFFF?text=LOGO" alt="Logo Institución">
+                <img src="https://placehold.co/60x60/02BF61/FFFFFF?text=LOGO" alt="Logo Institución">
             </div>
             <nav class="main-nav">
                 <ul>
                     <li><a href="#inicio" class="scroll-link active">INICIO</a></li>
-                    <li><a href="#nosotros" class="scroll-link">NOSOTROS</a></li>
                     <li><a href="#calendario" class="scroll-link">CALENDARIO</a></li>
                     <li><a href="#oferta" class="scroll-link">OFERTA ACADÉMICA</a></li>
                     <li><a href="#historia" class="scroll-link">HISTORIA</a></li>
@@ -29,74 +28,77 @@
     <main>
         <section id="inicio" class="hero-section">
             <div class="container content-carousel-grid">
+                <div class="institution-about">
+                    <h2 id="about-title">U.E. COLEGIO "SANTA BÁRBARA"</h2>
+                    <div id="about-content">
+                        <p>La <b>U.E. Colegio “Santa Bárbara”</b> es una institución educativa con una sólida trayectoria, dedicada a la formación integral de sus estudiantes en el municipio San Cristóbal, Estado Táchira. Nuestro compromiso se centra en ofrecer una educación de calidad que combine la excelencia académica con el desarrollo de valores cívicos y éticos.</p>
+                        <p>Nuestros objetivos principales son: fomentar el pensamiento crítico, cultivar la creatividad, promover el respeto y la tolerancia, e impulsar el liderazgo y la responsabilidad social en cada uno de nuestros alumnos.</p>
+                        <p>Buscamos preparar a nuestros estudiantes para que sean ciudadanos activos y capaces de enfrentar los desafíos del futuro.</p>
+                    </div>
+                </div>
+
                 <div class="news-carousel-container">
-                    <div id="news-carousel-wrapper" class="carousel-wrapper">
+                    <h3>Últimas Noticias</h3>
+                    <div class="carousel-wrapper" id="news-carousel-wrapper">
                         </div>
-                    <button class="carousel-prev">❮</button>
-                    <button class="carousel-next">❯</button>
-                    <div id="carousel-dots" class="carousel-dots"></div>
+                    <div class="carousel-dots" id="carousel-dots"></div>
                 </div>
             </div>
         </section>
 
-        <section id="nosotros" class="section-container">
+        <section id="calendario" class="section-container section-green-bg">
             <div class="container">
-                <h2 id="about-title">U.E. COLEGIO 'SANTA BÁRBARA'</h2>
-                <div id="about-content">
-                    </div>
-            </div>
-        </section>
-
-        <section id="calendario" class="section-container alternate-bg">
-            <div class="container">
-                <h2 id="calendar-section-title">CALENDARIO ESCOLAR</h2>
-                <div class="calendar">
+                <h2>Calendario Académico</h2>
+                <div class="calendar-display">
                     <div class="calendar-header">
-                        <button id="prevMonth">❮</button>
+                        <button id="prevMonth" class="calendar-nav-btn">‹</button>
                         <h3 id="currentMonthYear"></h3>
-                        <button id="nextMonth">❯</button>
+                        <button id="nextMonth" class="calendar-nav-btn">›</button>
                     </div>
                     <div class="calendar-weekdays">
-                        <div>Dom</div>
-                        <div>Lun</div>
-                        <div>Mar</div>
-                        <div>Mié</div>
-                        <div>Jue</div>
-                        <div>Vie</div>
-                        <div>Sáb</div>
+                        <span>Dom</span>
+                        <span>Lun</span>
+                        <span>Mar</span>
+                        <span>Mié</span>
+                        <span>Jue</span>
+                        <span>Vie</span>
+                        <span>Sáb</span>
                     </div>
-                    <div id="calendarDates" class="calendar-dates">
-                        </div>
+                    <div class="calendar-dates" id="calendarDates">
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="oferta" class="section-container">
             <div class="container">
-                <h2 id="offers-section-title">NUESTRA OFERTA ACADÉMICA</h2>
-                <div id="offer-cards-container" class="offer-cards-grid">
+                <h2>Nuestra Oferta Educativa</h2>
+                <div class="grid-layout offer-expandable-grid" id="offer-cards-container">
                     </div>
             </div>
         </section>
 
-        <section id="historia" class="section-container alternate-bg">
+        <section id="historia" class="section-container section-green-bg">
             <div class="container content-with-image">
                 <div class="text-content">
-                    <h2 id="history-section-title">NUESTRA HISTORIA</h2>
+                    <h2 id="history-title">NUESTRA HISTORIA</h2>
                     <div id="history-content">
-                        </div>
+                        <p>Fundada en el año 1999 por la Licda. Evis Solvey Zabala Gutierrez y la Licda. Arelis Ardila Diaz, la Unidad Educativa Colegio “Santa Bárbara” inició su trayectoria en la formación de jóvenes en el municipio San Cristóbal con 59 estudiantes, para Primaria y 1ero, 2do, 3ero de Media General, ofreciendo educación de calidad. Desde sus comienzos, la institución ha estado comprometida con la excelencia académica y la formación integral, consolidándose como un pilar educativo en la región. Con el tiempo, y en respuesta a las crecientes demandas y necesidades de la comunidad, la institución amplió su oferta educativa.</p>
+                        <p>Posteriormente, en el año 2023, se integró el nivel de educación pre-escolar, lo que permitió a la institución atender a la población desde sus etapas más tempranas de desarrollo. Actualmente, el Colegio “Santa Bárbara” es un centro educativo que atiende a una población estudiantil diversa, abarcando desde niños en edad pre-escolar hasta adolescentes y jóvenes en la etapa de secundaria.</p>
+                        <p>Su dirección y gestión recaen en un equipo comprometido liderado por la Lic. Arelis Ardila, Directora de la institución. Las instalaciones del colegio incluyen una planta física de 800 metros cuadrados bien distribuidos para el desarrollo académico del estudiantado, contando con las siguientes instalaciones: una oficina administrativa, 3 laboratorios (informática, Biología - Química y Manualidades). Baños de hembras–varones, cantina, oficina del Departamento de Evaluación y Control de Estudios y 14 aulas, diseñadas para proporcionar un ambiente de aprendizaje óptimo y seguro. La institución se ha mantenido como un referente educativo en el municipio San Cristóbal, adaptándose a los desafíos y contribuyendo significativamente al desarrollo académico y personal de sus estudiantes.</p>
+                    </div>
                 </div>
-                <div class="image-content">
-                    <img id="history-section-image" src="" alt="Fachada del Colegio">
+                <div class="image-content" id="history-image-container">
+                    <img src="https://placehold.co/400x300/02BF61/FFFFFF?text=Fachada+Colegio" alt="Fachada del Colegio Santa Bárbara" id="history-image">
                 </div>
             </div>
         </section>
 
         <section id="contacto" class="section-container">
             <div class="container contact-grid">
-                <div class="contact-form">
-                    <h2 id="contact-form-title">Formulario de Contacto</h2>
-                    <form id="contactForm">
+                <div class="contact-form-container">
+                    <h3>Envíanos un mensaje</h3>
+                    <form id="contactForm" class="contact-form">
                         <div class="form-group">
                             <label for="nombre">Nombre:</label>
                             <input type="text" id="nombre" name="nombre" required>
@@ -106,40 +108,42 @@
                             <input type="text" id="asunto" name="asunto" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Correo Electrónico:</label>
+                            <label for="email">Tu Correo Electrónico:</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
                             <label for="mensaje">Mensaje:</label>
                             <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn">Enviar Mensaje</button>
-                        <div id="form-messages" class="form-messages" style="display: none;"></div>
+                        <button type="submit" class="btn-submit">Enviar Mensaje</button>
                     </form>
+                    <div id="form-messages" class="form-messages"></div>
                 </div>
-                <div class="contact-info">
-                    <h3 id="contact-info-title">Información de Contacto</h3>
-                    <p><strong>Teléfono:</strong> <span id="contact-phone">(0276) 343-3631</span></p>
-                    <p><strong>Dirección:</strong> <span id="contact-address">Carrera. 10 con Calle 7, Casa #7-7, Centro, San Cristóbal, Edo. Táchira.</span></p>
-                    <p><strong>Síguenos en Instagram:</strong></p>
-                    <p class="instagram-link">
-                        <a id="instagram-link" href="https://www.instagram.com/colegio_santabarbara" target="_blank" aria-label="Instagram de Colegio Santa Bárbara">
-                            <i class="fab fa-instagram instagram-icon"></i> <span id="instagram-handle">@colegio_santabarbara</span>
-                        </a>
-                    </p>
+
+                <div class="contact-info-map">
+                    <div class="contact-details">
+                        <h3>Información de Contacto</h3>
+                        <p><strong>Teléfono:</strong> <span id="contact-phone">(0276) 343-3631</span></p>
+                        <p><strong>Dirección:</strong> <span id="contact-address">Carrera. 10 con Calle 7, Casa #7-7, Centro, San Cristóbal, Edo. Táchira.</span></p>
+                        <p><strong>Síguenos en Instagram:</strong></p>
+                        <p class="instagram-link">
+                            <a href="https://www.instagram.com/colegio_santabarbara" target="_blank" aria-label="Instagram de Colegio Santa Bárbara" id="instagram-link">
+                                <i class="fab fa-instagram instagram-icon"></i> <span id="instagram-handle">@colegio_santabarbara</span>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="map-container">
+                        <h3>Nuestra Ubicación</h3>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.068224355321!2d-72.23484456539155!3d7.7641527257239735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e660f9e2b1e7f9f%3A0xc3f6d7d8e6f1a8c!2sTeatro%20C%C3%ADrculo%20Militar%20San%20Crist%C3%B3bal!5e0!3m2!1ses-419!2sve!4v1717366367344!5m2!1ses-419!2sve" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="contact-map"></iframe>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <div class="map-container">
-            <h3 id="location-section-title">Nuestra Ubicación</h3>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.336499878233!2d-72.2227183256037!3d7.802102192212353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e66699321356f11%3A0x7d28c31f4c6e9e62!2sU.E.%20Colegio%20Santa%20B%C3%A1rbara!5e0!3m2!1ses-419!2sve!4v1719602446714!5m2!1ses-419!2sve" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
     </main>
 
     <footer class="main-footer">
         <div class="container">
-            <p>© 2024 U.E. Colegio Santa Bárbara. Todos los derechos reservados.</p>
+            <p>© 2025 U.E. Colegio Santa Bárbara. Todos los derechos reservados.</p>
         </div>
     </footer>
 
