@@ -290,9 +290,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Scroll Suave para Menú y Resaltado de Opción Activa ---
     const scrollLinks = document.querySelectorAll('.scroll-link');
-    // Colección de elementos que deben ser rastreados para resaltar el menú activo
-    const scrollTrackElements = document.querySelectorAll('section[id], div#nosotros');
-    const header = document.querySelector('.main-header');
+    const sections = document.querySelectorAll('section');
+    const header = document.querySelector('.main-header'); // Referencia al header
 
     function activateNavLink(id) {
         scrollLinks.forEach(link => {
@@ -304,18 +303,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkActiveSection() {
-        let currentActiveSectionId = 'inicio'; // Default a 'inicio'
-        const headerOffset = header ? header.offsetHeight : 0;
-        const activationMargin = 100; // Un margen para activar el enlace antes de que la sección esté completamente en la parte superior
+        let currentActiveSectionId = 'inicio'; // Por defecto si no se ha scrolleado
+        // Determina el offset del header: si estamos en desktop (>=992px), usa la altura del header, sino 0.
+        const headerOffset = window.innerWidth >= 992 ? header.offsetHeight : 0;
 
-        scrollTrackElements.forEach(element => {
-            const rect = element.getBoundingClientRect();
-            // Calcula la posición del elemento relativa al documento, ajustada por el offset del header
-            const offset = window.pageYOffset + rect.top - headerOffset;
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            // Calcular la posición del top de la sección relativa al inicio del documento
+            const sectionTop = rect.top + window.scrollY;
+            const sectionBottom = sectionTop + section.offsetHeight;
 
-            // Si la posición actual de scroll está dentro de los límites del elemento
-            if (window.pageYOffset >= offset - activationMargin && window.pageYOffset < offset + element.offsetHeight - activationMargin) {
-                currentActiveSectionId = element.id;
+            // Se activa la sección cuando su parte superior está visible
+            // y aún no se ha pasado la parte superior de la siguiente sección.
+            // Añadimos un pequeño margen para compensar cualquier pequeño desfase.
+            if (window.scrollY + headerOffset >= sectionTop - 50 && window.scrollY + headerOffset < sectionBottom - 50) {
+                currentActiveSectionId = section.id;
             }
         });
         activateNavLink(currentActiveSectionId);
