@@ -373,6 +373,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // ¡IMPORTANTE! Evita el envío por defecto del formulario
+            
+                    // Puedes añadir validaciones JavaScript aquí antes de enviar si lo deseas
+                    // Por ejemplo, para campos que no sean 'required' o validaciones más complejas.
+                    const nombre = this.querySelector('[name="nombre"]').value;
+                    const asunto = this.querySelector('[name="asunto"]').value;
+                    const email = this.querySelector('[name="email"]').value;
+                    const mensaje = this.querySelector('[name="mensaje"]').value;
+            
+                    if (!nombre || !asunto || !email || !mensaje) {
+                        displayMessage('Por favor, completa todos los campos requeridos.', 'error');
+                        return; // Detiene el envío si la validación falla
+                    }
+            
+                    // 1. Recopilar los datos del formulario
+                    const formData = new FormData(this); // 'this' se refiere al formulario
+            
+                    // 2. Enviar los datos a Netlify usando fetch
+                    fetch("/", { // La URL de envío para Netlify Forms con AJAX es la misma página
+                        method: "POST",
+                        // ¡IMPORTANTE! Este encabezado es crucial para que Netlify procese el formulario correctamente
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        // Convertir FormData a una cadena URL-encoded
+                        body: new URLSearchParams(formData).toString()
+                    })
+                    .then(response => {
+                        if (response.ok) { // Si la respuesta es exitosa (código 200-299)
+                            displayMessage('¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.', 'success');
+                            contactForm.reset(); // Limpia los campos del formulario
+                        } else {
+                            // Si Netlify devuelve un error (ej. 400 Bad Request, problemas con el honeypot)
+                            // Puedes intentar leer response.text() para ver un mensaje más específico si lo hay.
+                            displayMessage('Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        // Manejo de errores de red (ej. sin conexión)
+                        console.error('Error de red al enviar el formulario:', error);
+                        displayMessage('Hubo un problema de conexión. Por favor, inténtalo de nuevo.', 'error');
+                    });
+                });
             }
 
         function displayMessage(message, type) {
