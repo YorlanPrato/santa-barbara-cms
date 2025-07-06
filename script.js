@@ -9,28 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
             siteData.global = await globalResponse.json();
 
             const newsResponse = await fetch('/_data/news.json');
-            siteData.news = await newsResponse.json();
+            siteData.news = await newsResponse.json(); // Carga el objeto { "news": [...] }
 
             const offersResponse = await fetch('/_data/offers.json');
-            siteData.offers = await offersResponse.json();
+            siteData.offers = await offersResponse.json(); // Carga el objeto { "offers": [...] }
 
             const holidaysResponse = await fetch('/_data/holidays.json');
-            siteData.holidays = await holidaysResponse.json();
-
-            // Cargar datos de contacto desde la nueva colección
-            const contactResponse = await fetch('/_data/contact_data.json');
-            siteData.contact = await contactResponse.json();
-
+            siteData.holidays = await holidaysResponse.json(); // Carga el objeto { "holidays": [...] }
 
             const historyResponse = await fetch('/_data/history.md');
             const historyText = await historyResponse.text();
-            // Nueva función para parsear Markdown con frontmatter
-            siteData.history = parseMarkdownWithFrontmatter(historyText);
+            siteData.history = parseMarkdown(historyText);
 
             const aboutResponse = await fetch('/_data/about.md');
             const aboutText = await aboutResponse.text();
             siteData.about = parseMarkdown(aboutText);
-
 
             // Una vez cargados todos los datos, inicializar componentes
             initializePageContent();
@@ -41,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
             checkActiveSection();
         } catch (error) {
             console.error('Error loading site data:', error);
-            // Fallback a contenido estático o mostrar mensaje de error
             initializePageContent();
             initializeCarousel();
             initializeCalendar();
@@ -51,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Función para parsear Markdown (sin frontmatter)
+    // Función simple para parsear Markdown a HTML básico
     function parseMarkdown(markdownText) {
         let html = markdownText
             .replace(/^### (.*$)/gim, '<h3>$1</h3>')
@@ -77,97 +69,42 @@ document.addEventListener('DOMContentLoaded', () => {
         return html;
     }
 
-    // Nueva función para parsear Markdown con frontmatter
-    function parseMarkdownWithFrontmatter(markdownText) {
-        const frontmatterRegex = /^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/;
-        const match = markdownText.match(frontmatterRegex);
-
-        let frontmatter = {};
-        let body = markdownText;
-
-        if (match) {
-            const frontmatterContent = match[1];
-            body = match[2];
-
-            // Parsing simple de YAML frontmatter (key: value)
-            frontmatterContent.split('\n').forEach(line => {
-                const trimmedLine = line.trim();
-                if (trimmedLine) {
-                    const parts = trimmedLine.split(':');
-                    if (parts.length >= 2) {
-                        const key = parts[0].trim();
-                        const value = parts.slice(1).join(':').trim();
-                        // Remover comillas si existen (para URLs de imagen, etc.)
-                        frontmatter[key] = value.startsWith('"') && value.endsWith('"') ? value.slice(1, -1) : value;
-                    }
-                }
-            });
-        }
-
-        return {
-            frontmatter: frontmatter,
-            body: parseMarkdown(body) // Usar la función parseMarkdown para el cuerpo
-        };
-    }
-
     // --- Inicializar contenido estático y dinámico ---
     function initializePageContent() {
-        // Logo
-        const mainLogoElement = document.getElementById('main-logo');
-        if (siteData.global && siteData.global.logo_image) {
-            mainLogoElement.src = siteData.global.logo_image;
-        }
-
-        // Títulos de Sección
         const aboutTitleElement = document.getElementById('about-title');
+        const aboutContentElement = document.getElementById('about-content');
         if (siteData.global && siteData.global.about_title) {
             aboutTitleElement.textContent = siteData.global.about_title;
         }
-
-        const calendarSectionTitleElement = document.getElementById('calendar-section-title');
-        if (siteData.global && siteData.global.calendar_title) {
-            calendarSectionTitleElement.textContent = siteData.global.calendar_title;
-        }
-
-        const offersSectionTitleElement = document.getElementById('offers-section-title');
-        if (siteData.global && siteData.global.offers_title) {
-            offersSectionTitleElement.textContent = siteData.global.offers_title;
-        }
-
-        const historySectionTitleElement = document.getElementById('history-section-title');
-        if (siteData.global && siteData.global.history_title) {
-            historySectionTitleElement.textContent = siteData.global.history_title;
-        }
-
-        const contactFormTitleElement = document.getElementById('contact-form-title');
-        if (siteData.global && siteData.global.form_contact_title) {
-            contactFormTitleElement.textContent = siteData.global.form_contact_title;
-        }
-
-        const contactInfoTitleElement = document.getElementById('contact-info-title');
-        if (siteData.global && siteData.global.contact_info_title) {
-            contactInfoTitleElement.textContent = siteData.global.contact_info_title;
-        }
-
-        const locationSectionTitleElement = document.getElementById('location-section-title');
-        if (siteData.global && siteData.global.location_title) {
-            locationSectionTitleElement.textContent = siteData.global.location_title;
-        }
-
-        // Contenido de Nosotros
-        const aboutContentElement = document.getElementById('about-content');
         if (siteData.about) {
             aboutContentElement.innerHTML = siteData.about;
         }
 
-        // Contenido e imagen de Historia
+        const historyTitleElement = document.getElementById('history-title');
         const historyContentElement = document.getElementById('history-content');
-        const historySectionImageElement = document.getElementById('history-section-image');
+        const historyImageElement = document.getElementById('history-image');
+        if (siteData.global && siteData.global.history_title) {
+            historyTitleElement.textContent = siteData.global.history_title;
+        }
         if (siteData.history) {
-            historyContentElement.innerHTML = siteData.history.body;
-            if (siteData.history.frontmatter && siteData.history.frontmatter.section_image_history) {
-                historySectionImageElement.src = siteData.history.frontmatter.section_image_history;
-            }
+            historyContentElement.innerHTML = siteData.history;
+        }
+        if (siteData.global && siteData.global.history_image) {
+            historyImageElement.src = siteData.global.history_image;
+        }
+
+        const contactPhone = document.getElementById('contact-phone');
+        const contactAddress = document.getElementById('contact-address');
+        const instagramLink = document.getElementById('instagram-link');
+        const instagramHandle = document.getElementById('instagram-handle');
+        const contactMap = document.getElementById('contact-map');
+
+        if (siteData.global) {
+            if (siteData.global.contact_phone) contactPhone.textContent = siteData.global.contact_phone;
+            if (siteData.global.contact_address) contactAddress.textContent = siteData.global.contact_address;
+            if (siteData.global.instagram_url) instagramLink.href = siteData.global.instagram_url;
+            if (siteData.global.instagram_handle) instagramHandle.textContent = siteData.global.instagram_handle;
+            if (siteData.global.map_embed_url) contactMap.src = siteData.global.map_embed_url;
         }
     }
 
@@ -180,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.querySelector('.carousel-next');
 
     function initializeCarousel() {
+        // Acceder a siteData.news.news
         const newsItems = siteData.news && siteData.news.news ? siteData.news.news : [];
 
         if (!newsCarouselWrapper || newsItems.length === 0) {
@@ -345,19 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const contactForm = document.getElementById('contactForm');
         const formMessages = document.getElementById('form-messages');
 
-        // Actualizar información de contacto desde siteData.contact
-        const contactPhone = document.getElementById('contact-phone');
-        const contactAddress = document.getElementById('contact-address');
-        const instagramLink = document.getElementById('instagram-link');
-        const instagramHandle = document.getElementById('instagram-handle');
-
-        if (siteData.contact) {
-            if (siteData.contact.contact_phone) contactPhone.textContent = siteData.contact.contact_phone;
-            if (siteData.contact.contact_address) contactAddress.textContent = siteData.contact.contact_address;
-            if (siteData.contact.instagram_url) instagramLink.href = siteData.contact.instagram_url;
-            if (siteData.contact.instagram_handle) instagramHandle.textContent = siteData.contact.instagram_handle;
-        }
-
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -395,6 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Funcionalidad de Recuadros Ampliables en Oferta Académica ---
     function initializeExpandableCards() {
         const offerCardsContainer = document.getElementById('offer-cards-container');
+        // Acceder a siteData.offers.offers
         const offerItems = siteData.offers && siteData.offers.offers ? siteData.offers.offers : [];
 
         if (!offerCardsContainer || offerItems.length === 0) {
@@ -543,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
             };
         }
-        if (nextMonthBtn) {
+        if (nextMonthBtn) { // CORREGIDO: de nextDate a nextMonthBtn
             nextMonthBtn.onclick = () => {
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
@@ -581,7 +507,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 cell.classList.add('today');
             }
 
-            const holiday = siteData.holidays && siteData.holidays.holidays ?
+            // Acceder a siteData.holidays.holidays
+            const holiday = siteData.holidays && siteData.holidays.holidays ? 
                             siteData.holidays.holidays.find(h => h.month === month + 1 && h.day === day) : null;
             if (holiday) {
                 cell.classList.add('holiday');
