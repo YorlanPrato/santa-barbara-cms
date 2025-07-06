@@ -544,8 +544,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
             };
         }
-        if (nextMonthBtn) {
-            nextDate.onclick = () => { // **POSIBLE ERROR: nextDate.onclick, debería ser nextMonthBtn.onclick**
+        if (nextMonthBtn) { // CORRECCIÓN AQUÍ: nextDate fue cambiado a nextMonthBtn
+            nextMonthBtn.onclick = () => {
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
             };
