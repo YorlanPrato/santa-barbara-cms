@@ -184,7 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (dotsContainer) dotsContainer.style.display = '';
         }
 
-        newsCarouselWrapper.innerHTML = '';
+        const existingSlides = newsCarouselWrapper.querySelectorAll('.carousel-slide');
+        existingSlides.forEach(slide => slide.remove());
         if (dotsContainer) {
             dotsContainer.innerHTML = '';
         }
