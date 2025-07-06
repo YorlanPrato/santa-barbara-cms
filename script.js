@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             initializeCalendar();
             initializeExpandableCards();
             initializeContactFormAndInfo();
-            checkActiveSection();
+            checkActiveSection(); // Revisa la sección activa al cargar
         } catch (error) {
             console.error('Error al cargar los datos del sitio:', error);
             console.error('Detalles del error:', error.message, error.stack);
@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Títulos de Sección
         const titles = {
+            'news-section-title': 'news_title', // Nuevo título para la sección de noticias
             'about-title': 'about_title',
             'calendar-section-title': 'calendar_title',
             'offers-section-title': 'offers_title',
@@ -171,7 +172,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newsCarouselWrapper) {
                 newsCarouselWrapper.innerHTML = '<p>No hay noticias disponibles.</p>';
             }
+            // Ocultar botones y puntos si no hay noticias
+            if (prevBtn) prevBtn.style.display = 'none';
+            if (nextBtn) nextBtn.style.display = 'none';
+            if (dotsContainer) dotsContainer.style.display = 'none';
             return;
+        } else {
+            // Asegurarse de que los botones y puntos estén visibles si hay noticias
+            if (prevBtn) prevBtn.style.display = '';
+            if (nextBtn) nextBtn.style.display = '';
+            if (dotsContainer) dotsContainer.style.display = '';
         }
 
         newsCarouselWrapper.innerHTML = '';
@@ -279,7 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Scroll Suave para Menú y Resaltado de Opción Activa ---
     const scrollLinks = document.querySelectorAll('.scroll-link');
-    const sections = document.querySelectorAll('section');
+    // Colección de elementos que deben ser rastreados para resaltar el menú activo
+    const scrollTrackElements = document.querySelectorAll('section[id], div#nosotros');
     const header = document.querySelector('.main-header');
 
     function activateNavLink(id) {
@@ -292,16 +303,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkActiveSection() {
-        let currentActiveSectionId = 'inicio';
+        let currentActiveSectionId = 'inicio'; // Default a 'inicio'
         const headerOffset = header ? header.offsetHeight : 0;
-        const activationMargin = 100;
+        const activationMargin = 100; // Un margen para activar el enlace antes de que la sección esté completamente en la parte superior
 
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
+        scrollTrackElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            // Calcula la posición del elemento relativa al documento, ajustada por el offset del header
             const offset = window.pageYOffset + rect.top - headerOffset;
 
-            if (window.pageYOffset >= offset - activationMargin && window.pageYOffset < offset + section.offsetHeight - activationMargin) {
-                currentActiveSectionId = section.id;
+            // Si la posición actual de scroll está dentro de los límites del elemento
+            if (window.pageYOffset >= offset - activationMargin && window.pageYOffset < offset + element.offsetHeight - activationMargin) {
+                currentActiveSectionId = element.id;
             }
         });
         activateNavLink(currentActiveSectionId);
@@ -328,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', checkActiveSection);
     window.addEventListener('load', () => {
-        setTimeout(checkActiveSection, 100);
+        setTimeout(checkActiveSection, 100); // Pequeño retraso para asegurar que todos los elementos estén renderizados
     });
 
     // --- Formulario de Contacto (Validación Básica) ---
@@ -544,7 +557,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
             };
         }
-        if (nextMonthBtn) { // CORRECCIÓN AQUÍ: nextDate fue cambiado a nextMonthBtn
+        if (nextMonthBtn) {
             nextMonthBtn.onclick = () => {
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
