@@ -5,32 +5,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Función para cargar datos desde JSON/Markdown ---
     async function loadData() {
         try {
-            // Cargar datos de configuración global (ej. contacto, información de inicio)
             const globalResponse = await fetch('/_data/site_data.json');
             siteData.global = await globalResponse.json();
 
-            // Cargar noticias
             const newsResponse = await fetch('/_data/news.json');
-            siteData.news = await newsResponse.json();
+            siteData.news = await newsResponse.json(); // Carga el objeto { "news": [...] }
 
-            // Cargar ofertas académicas
             const offersResponse = await fetch('/_data/offers.json');
-            siteData.offers = await offersResponse.json();
+            siteData.offers = await offersResponse.json(); // Carga el objeto { "offers": [...] }
 
-            // Cargar días festivos
             const holidaysResponse = await fetch('/_data/holidays.json');
-            siteData.holidays = await holidaysResponse.json();
+            siteData.holidays = await holidaysResponse.json(); // Carga el objeto { "holidays": [...] }
 
-            // Cargar contenido de la historia (como un markdown simple)
             const historyResponse = await fetch('/_data/history.md');
             const historyText = await historyResponse.text();
             siteData.history = parseMarkdown(historyText);
 
-            // Cargar contenido de "Nosotros" (como un markdown simple)
             const aboutResponse = await fetch('/_data/about.md');
             const aboutText = await aboutResponse.text();
             siteData.about = parseMarkdown(aboutText);
-
 
             // Una vez cargados todos los datos, inicializar componentes
             initializePageContent();
@@ -38,11 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
             initializeCalendar();
             initializeExpandableCards();
             initializeContactFormAndInfo();
-            checkActiveSection(); // Para asegurar que la sección inicial esté activa
+            checkActiveSection();
         } catch (error) {
             console.error('Error loading site data:', error);
-            // Fallback a contenido estático o mostrar mensaje de error
-            initializePageContent(); // Intenta inicializar con lo que haya
+            initializePageContent();
             initializeCarousel();
             initializeCalendar();
             initializeExpandableCards();
@@ -61,17 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/gim, '<em>$1</em>')
             .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2">$1</a>')
-            .replace(/^(?!<h|<ul|<li|<p>)(.*$)/gim, '<p>$1</p>'); // Wrap lines not starting with known tags in p
+            .replace(/^(?!<h|<ul|<li|<p>)(.*$)/gim, '<p>$1</p>');
         
-        // Wrap li elements in ul if they exist (simple approach)
         if (html.includes('<li>')) {
             html = `<ul>${html}</ul>`;
         }
         
-        // Convert double newlines to <p> tags
         html = html.split('\n\n').map(p => {
             if (!p.startsWith('<h') && !p.startsWith('<ul')) {
-                return `<p>${p.replace(/\n/g, '<br>')}</p>`; // Replace single newlines with <br> inside paragraphs
+                return `<p>${p.replace(/\n/g, '<br>')}</p>`;
             }
             return p;
         }).join('');
@@ -79,10 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return html;
     }
 
-
     // --- Inicializar contenido estático y dinámico ---
     function initializePageContent() {
-        // Sección "Nosotros"
         const aboutTitleElement = document.getElementById('about-title');
         const aboutContentElement = document.getElementById('about-content');
         if (siteData.global && siteData.global.about_title) {
@@ -92,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutContentElement.innerHTML = siteData.about;
         }
 
-        // Sección "Historia"
         const historyTitleElement = document.getElementById('history-title');
         const historyContentElement = document.getElementById('history-content');
         const historyImageElement = document.getElementById('history-image');
@@ -106,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
             historyImageElement.src = siteData.global.history_image;
         }
 
-        // Información de Contacto
         const contactPhone = document.getElementById('contact-phone');
         const contactAddress = document.getElementById('contact-address');
         const instagramLink = document.getElementById('instagram-link');
@@ -122,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     // --- Carrusel de Noticias ---
     let currentSlide = 0;
     let carouselInterval;
@@ -132,15 +117,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.querySelector('.carousel-next');
 
     function initializeCarousel() {
-        if (!newsCarouselWrapper || !siteData.news || siteData.news.length === 0) {
+        // Acceder a siteData.news.news
+        const newsItems = siteData.news && siteData.news.news ? siteData.news.news : [];
+
+        if (!newsCarouselWrapper || newsItems.length === 0) {
             newsCarouselWrapper.innerHTML = '<p>No hay noticias disponibles.</p>';
             return;
         }
 
-        newsCarouselWrapper.innerHTML = ''; // Limpiar contenido existente
-        dotsContainer.innerHTML = ''; // Limpiar dots existentes
+        newsCarouselWrapper.innerHTML = '';
+        dotsContainer.innerHTML = '';
 
-        siteData.news.forEach((item, index) => {
+        newsItems.forEach((item, index) => {
             const slide = document.createElement('div');
             slide.classList.add('carousel-slide');
             if (index === 0) slide.classList.add('active');
@@ -165,8 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
             dotsContainer.appendChild(dot);
         });
 
-        // Asegurarse de que los botones de navegación estén presentes (ya están en HTML)
-        // Y añadir los listeners de evento aquí, después de que los slides existan
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
                 prevSlide();
@@ -229,15 +215,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function startCarousel() {
         const slides = document.querySelectorAll('.carousel-slide');
         if (!slides || slides.length === 0) return;
-        clearInterval(carouselInterval); // Asegura que no haya intervalos duplicados
-        carouselInterval = setInterval(nextSlide, 5000); // Cambia cada 5 segundos
+        clearInterval(carouselInterval);
+        carouselInterval = setInterval(nextSlide, 5000);
     }
 
     function resetCarouselInterval() {
         clearInterval(carouselInterval);
         startCarousel();
     }
-
 
     // --- Scroll Suave para Menú y Resaltado de Opción Activa ---
     const scrollLinks = document.querySelectorAll('.scroll-link');
@@ -313,10 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Aquí iría la lógica para enviar el formulario a un servidor
-                // Netlify Forms maneja esto automáticamente si el HTML tiene el atributo data-netlify="true"
-                // y configuras la redirección o un mensaje de éxito en Netlify.
-                // Para demostración, simulamos un envío exitoso.
                 console.log('Formulario enviado:', { name, subject, email, message });
 
                 displayMessage('¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.', 'success');
@@ -336,18 +317,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     // --- Funcionalidad de Recuadros Ampliables en Oferta Académica ---
     function initializeExpandableCards() {
         const offerCardsContainer = document.getElementById('offer-cards-container');
-        if (!offerCardsContainer || !siteData.offers || siteData.offers.length === 0) {
+        // Acceder a siteData.offers.offers
+        const offerItems = siteData.offers && siteData.offers.offers ? siteData.offers.offers : [];
+
+        if (!offerCardsContainer || offerItems.length === 0) {
             offerCardsContainer.innerHTML = '<p>No hay ofertas académicas disponibles.</p>';
             return;
         }
 
-        offerCardsContainer.innerHTML = ''; // Limpiar contenido existente
+        offerCardsContainer.innerHTML = '';
 
-        siteData.offers.forEach(offer => {
+        offerItems.forEach(offer => {
             const card = document.createElement('div');
             card.classList.add('offer-card', 'expandable-card', offer.color_class);
 
@@ -405,9 +388,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevMonthBtn = document.getElementById('prevMonth');
     const nextMonthBtn = document.getElementById('nextMonth');
 
-    let currentDate = new Date(); // Mover aquí para que sea global en el contexto del script
+    let currentDate = new Date();
 
-    // Variable global para mantener el seguimiento del tooltip actual
     let currentHolidayTooltip = null;
 
     function showHolidayTooltip(message, targetElement) {
@@ -474,7 +456,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeCalendar() {
         if (!calendarDatesElement || !currentMonthYearElement) return;
 
-        // Limpiar cualquier tooltip activo al cambiar el calendario
         if (currentHolidayTooltip) {
             currentHolidayTooltip.remove();
             currentHolidayTooltip = null;
@@ -483,13 +464,13 @@ document.addEventListener('DOMContentLoaded', () => {
         generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
 
         if (prevMonthBtn) {
-            prevMonthBtn.onclick = () => { // Usar onclick para evitar duplicados si se llama initializeCalendar varias veces
+            prevMonthBtn.onclick = () => {
                 currentDate.setMonth(currentDate.getMonth() - 1);
                 generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
             };
         }
-        if (nextMonthBtn) {
-            nextMonthBtn.onclick = () => { // Usar onclick
+        if (nextMonthBtn) { // CORREGIDO: de nextDate a nextMonthBtn
+            nextMonthBtn.onclick = () => {
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
             };
@@ -526,8 +507,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 cell.classList.add('today');
             }
 
-            // Usar siteData.holidays para buscar días festivos
-            const holiday = siteData.holidays ? siteData.holidays.find(h => h.month === month + 1 && h.day === day) : null; // Month in JSON is 1-indexed
+            // Acceder a siteData.holidays.holidays
+            const holiday = siteData.holidays && siteData.holidays.holidays ? 
+                            siteData.holidays.holidays.find(h => h.month === month + 1 && h.day === day) : null;
             if (holiday) {
                 cell.classList.add('holiday');
                 cell.addEventListener('click', (e) => {
