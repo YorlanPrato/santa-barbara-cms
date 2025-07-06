@@ -91,11 +91,11 @@ p {
         top: 0;
     }
     .main-header .container {
-        flex-direction: row; /* Logo y menú en fila */
-        justify-content: space-between; /* Espacio entre logo y menú en desktop */
-        align-items: center; /* Centra verticalmente el logo y el nav en el contenedor */
-        padding: 0 20px; /* Restaura el padding horizontal del contenedor */
-        min-height: 80px; /* Vuelve a la altura normal en desktop */
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch; /* Estira los elementos para ocupar todo el alto */
+        padding: 0 20px;
+        min-height: 80px; /* Altura mínima del header */
     }
     .main-header .logo {
         padding: 0; /* No necesita padding aquí si el contenedor lo maneja */
