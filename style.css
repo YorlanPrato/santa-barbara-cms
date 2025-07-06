@@ -87,58 +87,70 @@ p {
 /* --- Media Query para Desktop (min-width: 992px) --- */
 @media (min-width: 992px) {
     .main-header {
-        position: sticky; /* Encabezado fijo en desktop */
-        top: 0;
-    }
-    .main-header .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch; /* Estira los elementos para ocupar todo el alto */
-        padding: 0 20px;
-        min-height: 80px; /* Altura mínima del header */
-    }
-    .main-header .logo {
-        padding: 0; /* No necesita padding aquí si el contenedor lo maneja */
-    }
-    .main-nav {
-        display: flex; /* Muestra el menú de navegación completo en desktop */
-        align-items: stretch; /* Permite que los items ocupen todo el alto del header */
-        flex-direction: row; /* Elementos del menú en fila */
-        position: static; /* No fijo, parte del flujo normal del documento */
-        width: auto;
-        height: 100%; /* Asegura que el nav ocupe todo el alto disponible del contenedor */
-        background-color: transparent;
-        box-shadow: none;
-        overflow-y: visible;
-        z-index: auto;
-    }
-    .main-nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        height: 100%; /* Ocupa el 100% de la altura de su padre (main-nav) */
-    }
-    .main-nav ul li {
-        margin: 0;
-        display: flex;
-        align-items: stretch; /* Hace que los LI se estiren verticalmente para ocupar toda la altura del UL */
-    }
-    .main-nav ul li a {
-        color: #fff; /* Texto blanco en el menú */
-        font-weight: bold;
-        padding: 0 25px; /* Padding horizontal */
-        font-size: 1.05em;
-        height: 100%; /* Ocupa todo el alto de su padre (li) */
-        display: flex;
-        align-items: center; /* Centra verticalmente el texto dentro del enlace */
-        text-decoration: none;
-        transition: background-color 0.3s ease;
-    }
-    .main-nav ul li a.active,
-    .main-nav ul li a:hover {
-        background-color: #01A654; /* Fondo más oscuro que ocupe todo el espacio vertical */
-        color: #fff;
+    background-color: #02BF61; /* Barra superior totalmente verde */
+    padding: 0; /* Ajusta el padding para que el contenido del nav ocupe todo el alto */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Estira los elementos para ocupar todo el alto */
+    padding: 0 20px;
+    min-height: 80px; /* Altura mínima del header */
+}
+
+.main-header .logo {
+    display: flex;
+    align-items: center;
+    padding: 10px 0; /* Padding para el logo */
+}
+
+.main-header .logo img {
+    height: 60px; /* Ajusta el tamaño del logo */
+    border-radius: 5px; /* Bordes suaves para el placeholder */
+}
+
+/* Menú de navegación */
+.main-nav {
+    display: flex;
+    align-items: stretch; /* Permite que los items ocupen todo el alto del header */
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100%; /* Ocupa el 100% de la altura de la barra */
+}
+
+.main-nav ul li {
+    margin: 0; /* Elimina márgenes entre items */
+    display: flex; /* Asegura que el enlace ocupe todo el espacio de LI */
+    align-items: center; /* Centra verticalmente el texto en LI */
+}
+
+.main-nav ul li a {
+    color: #fff; /* Texto blanco en el menú */
+    font-weight: bold;
+    font-size: 1.05em;
+    padding: 0 25px; /* Padding horizontal para el texto */
+    height: 100%; /* Ocupa el 100% de la altura de LI */
+    display: flex; /* Para centrar texto dentro del a */
+    align-items: center; /* Centra verticalmente el texto */
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo para opción seleccionada y hover */
+.main-nav ul li a.active,
+.main-nav ul li a:hover {
+    background-color: #01A654; /* Fondo ligeramente más oscuro que ocupe todo el espacio vertical */
+    color: #fff; /* Texto blanco permanece */
+    text-decoration: none;
     }
 }
 
