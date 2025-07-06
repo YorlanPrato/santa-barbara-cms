@@ -1,17 +1,19 @@
-[
-  {
-    "title": "Educación\nPre-escolar",
-    "content": "En esta etapa fundamental, nuestro objetivo es despertar la curiosidad y el amor por el aprendizaje a través del juego y actividades lúdicas. Se fomenta el desarrollo de habilidades motoras, cognitivas, sociales y emocionales en un ambiente seguro y estimulante.",
-    "color_class": "pastel-yellow"
-  },
-  {
-    "title": "Educación\nPrimaria",
-    "content": "Ofrecemos un currículo sólido que garantiza el dominio de las competencias básicas en lectura, escritura, matemáticas y ciencias. Se promueve el razonamiento, la autonomía y el trabajo en equipo, formando estudiantes con bases académicas fuertes y valores ciudadanos.",
-    "color_class": "pastel-blue"
-  },
-  {
-    "title": "Educación\nMedia General",
-    "content": "Preparamos a nuestros jóvenes para los retos académicos y profesionales del futuro. Se profundizan los conocimientos en diversas áreas del saber, se estimula la investigación, el análisis crítico y la participación activa en proyectos que impulsan su crecimiento personal y social.",
-    "color_class": "pastel-red"
-  }
-]
+{
+  "offers": [
+    {
+      "title": "Educación\nPre-escolar",
+      "content": "En esta etapa fundamental, nuestro objetivo es despertar la curiosidad y el amor por el aprendizaje a través del juego y actividades lúdicas. Se fomenta el desarrollo de habilidades motoras, cognitivas, sociales y emocionales en un ambiente seguro y estimulante.",
+      "color_class": "pastel-yellow"
+    },
+    {
+      "title": "Educación\nPrimaria",
+      "content": "Ofrecemos un currículo sólido que garantiza el dominio de las competencias básicas en lectura, escritura, matemáticas y ciencias. Se promueve el razonamiento, la autonomía y el trabajo en equipo, formando estudiantes con bases académicas fuertes y valores ciudadanos.",
+      "color_class": "pastel-blue"
+    },
+    {
+      "title": "Educación\nMedia General",
+      "content": "Preparamos a nuestros jóvenes para los retos académicos y profesionales del futuro. Se profundizan los conocimientos en diversas áreas del saber, se estimula la investigación, el análisis crítico y la participación activa en proyectos que impulsan su crecimiento personal y social.",
+      "color_class": "pastel-red"
+    }
+  ]
+}
