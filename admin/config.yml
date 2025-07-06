@@ -42,39 +42,45 @@ collections:
 
   - name: "news_list"
     label: "Noticias del Carrusel"
-    file: "_data/news.json"
-    fields:
-      - label: "Lista de Noticias"
-        name: "news"
-        widget: "list"
-        # summary: "{{fields.title}}" # Eliminado para solucionar el error
+    files: # CAMBIO AQUÍ: de 'file' (singular) a 'files' (plural)
+      - file: "_data/news.json" # Definimos el único archivo aquí
+        label: "Datos de Noticias" # Etiqueta para este archivo específico
+        name: "news_config" # Nombre interno para la configuración de este archivo
         fields:
-          - {label: "Título de la Noticia", name: "title", widget: "string"}
-          - {label: "Descripción Breve", name: "description", widget: "text"}
-          - {label: "Imagen de la Noticia", name: "image", widget: "image", required: false}
+          - label: "Lista de Noticias"
+            name: "news"
+            widget: "list"
+            fields:
+              - {label: "Título de la Noticia", name: "title", widget: "string"}
+              - {label: "Descripción Breve", name: "description", widget: "text"}
+              - {label: "Imagen de la Noticia", name: "image", widget: "image", required: false}
 
   - name: "offers_list"
     label: "Oferta Académica"
-    file: "_data/offers.json"
-    fields:
-      - label: "Lista de Ofertas"
-        name: "offers"
-        widget: "list"
-        # summary: "{{fields.title}}" # Eliminado para solucionar el error
+    files: # CAMBIO AQUÍ: de 'file' (singular) a 'files' (plural)
+      - file: "_data/offers.json" # Definimos el único archivo aquí
+        label: "Datos de Ofertas"
+        name: "offers_config"
         fields:
-          - {label: "Título de la Oferta", name: "title", widget: "string"}
-          - {label: "Contenido de la Oferta", name: "content", widget: "text"}
-          - {label: "Clase de Color Pastel", name: "color_class", widget: "select", options: ["pastel-yellow", "pastel-blue", "pastel-red"]}
+          - label: "Lista de Ofertas"
+            name: "offers"
+            widget: "list"
+            fields:
+              - {label: "Título de la Oferta", name: "title", widget: "string"}
+              - {label: "Contenido de la Oferta", name: "content", widget: "text"}
+              - {label: "Clase de Color Pastel", name: "color_class", widget: "select", options: ["pastel-yellow", "pastel-blue", "pastel-red"]}
 
   - name: "holidays_list"
     label: "Días Festivos (Calendario)"
-    file: "_data/holidays.json"
-    fields:
-      - label: "Lista de Días Festivos"
-        name: "holidays"
-        widget: "list"
-        # summary: "{{fields.name}} ({{fields.day}}/{{fields.month}})" # Eliminado para solucionar el error
+    files: # CAMBIO AQUÍ: de 'file' (singular) a 'files' (plural)
+      - file: "_data/holidays.json" # Definimos el único archivo aquí
+        label: "Datos de Días Festivos"
+        name: "holidays_config"
         fields:
-          - {label: "Nombre del Festivo", name: "name", widget: "string"}
-          - {label: "Día", name: "day", widget: "number", min: 1, max: 31}
-          - {label: "Mes (1=Enero, 12=Diciembre)", name: "month", widget: "number", min: 1, max: 12}
+          - label: "Lista de Días Festivos"
+            name: "holidays"
+            widget: "list"
+            fields:
+              - {label: "Nombre del Festivo", name: "name", widget: "string"}
+              - {label: "Día", name: "day", widget: "number", min: 1, max: 31}
+              - {label: "Mes (1=Enero, 12=Diciembre)", name: "month", widget: "number", min: 1, max: 12}
